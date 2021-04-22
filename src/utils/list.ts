@@ -1,4 +1,4 @@
-import tokenlist from 'yogi-ass/generated/listed.tokenlist.json';
+import tokenlist from 'yogi-assets/generated/listed.tokenlist.json';
 
 import config, { AssetMetadata } from '@/config';
 
