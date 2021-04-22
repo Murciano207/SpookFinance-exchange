@@ -1,8 +1,8 @@
-import tokenlist from '@balancer-labs/assets/generated/listed.tokenlist.json';
+import tokenlist from 'yogi-ass/generated/listed.tokenlist.json';
 
 import config, { AssetMetadata } from '@/config';
 
-const ETH_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png';
+const BNB_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/info/logo.png';
 
 export interface TokenList {
     name: string;
@@ -19,7 +19,7 @@ interface Token {
     logoURI?: string;
 }
 
-export const DEFAULT_LIST = 'balancer';
+export const DEFAULT_LIST = 'yogi';
 
 export const listMetadata: Record<string, string> = {
     [DEFAULT_LIST]: '',
@@ -42,13 +42,13 @@ export async function getTokenlist(id: string): Promise<TokenList> {
 
 export function getAssetsFromTokenlist(chainId: number, list: TokenList): Record<string, AssetMetadata> {
     const assets: Record<string, AssetMetadata> = {};
-    if (list.tokens.findIndex(token => token.address === config.addresses.weth) !== -1) {
-        assets.ether = {
-            address: 'ether',
-            name: 'Ether',
-            symbol: 'ETH',
+    if (list.tokens.findIndex(token => token.address === config.addresses.wbnb) !== -1) {
+        assets.bnb = {
+            address: 'bnb',
+            name: 'BNB',
+            symbol: 'BNB',
             decimals: 18,
-            logoURI: ETH_LOGO,
+            logoURI: BNB_LOGO,
         };
     }
     for (const token of list.tokens) {

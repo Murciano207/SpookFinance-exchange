@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import { createWebHashHistory, createRouter } from 'vue-router';
 import store from './store';
-import '@/utils/fathom';
 
 import App from './App.vue';
 

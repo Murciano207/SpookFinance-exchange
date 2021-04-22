@@ -1,11 +1,8 @@
-import { AlchemyProvider, InfuraProvider } from '@ethersproject/providers';
+import { JsonRpcProvider } from '@ethersproject/providers';
 
 import config from '@/config';
 
-const provider = new InfuraProvider(config.network, config.infuraKey);
+// TODO: randomize rpc
+const provider = new JsonRpcProvider(config.rpc[0], config.chainId);
 
 export default provider;
-
-const debugProvider = new AlchemyProvider(config.network, config.alchemyKey);
-
-export { debugProvider };

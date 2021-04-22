@@ -1,10 +1,10 @@
-import { Provider, Contract } from 'ethcall';
+import { Provider, Contract } from 'bsccall';
 
 import dsProxyRegistryAbi from '../abi/DSProxyRegistry.json';
 import erc20Abi from '../abi/ERC20.json';
 
 import config, { AssetMetadata } from '@/config';
-import { ETH_KEY, getAssetLogo } from '@/utils/helpers';
+import { NATIVE_TOKEN, getAssetLogo } from '@/utils/helpers';
 import provider from '@/utils/provider';
 
 export type Allowances = Record<string, Record<string, string>>;
@@ -17,11 +17,11 @@ export interface AccountState {
     proxy: string;
 }
 
-export default class Ethereum {
+export default class Chain {
     static async fetchAccountState(address: string, assets: string[]): Promise<AccountState> {
-        assets = assets.filter(asset => asset !== ETH_KEY);
-        const ethcallProvider = new Provider();
-        await ethcallProvider.init(provider);
+        assets = assets.filter(asset => asset !== NATIVE_TOKEN);
+        const callProvider = new Provider();
+        await callProvider.init(provider);
         const calls = [];
         // Fetch balances and allowances
         const exchangeProxyAddress = config.addresses.exchangeProxy;
@@ -32,9 +32,9 @@ export default class Ethereum {
             calls.push(balanceCall);
             calls.push(allowanceCall);
         }
-        // Fetch ether balance
-        const ethBalanceCall = ethcallProvider.getEthBalance(address);
-        calls.push(ethBalanceCall);
+        // Fetch bnb balance
+        const balanceCall = callProvider.getBnbBalance(address);
+        calls.push(balanceCall);
         // Fetch proxy
         const dsProxyRegistryAddress = config.addresses.dsProxyRegistry;
         const dsProxyRegistryContract = new Contract(
@@ -44,7 +44,7 @@ export default class Ethereum {
         const proxyCall = dsProxyRegistryContract.proxies(address);
         calls.push(proxyCall);
         // Fetch data
-        const data = await ethcallProvider.all(calls);
+        const data = await callProvider.all(calls);
         const assetCount = assets.length;
         const allowances = {};
         allowances[exchangeProxyAddress] = {};
@@ -55,14 +55,14 @@ export default class Ethereum {
             allowances[exchangeProxyAddress][assetAddress] = data[2 * i + 1].toString();
             i++;
         }
-        balances.ether = data[2 * assetCount].toString();
+        balances.bnb = data[2 * assetCount].toString();
         const proxy = data[2 * assetCount + 1];
         return { allowances, balances, proxy };
     }
 
     static async fetchAssetMetadata(assets: string[]): Promise<Record<string, AssetMetadata>> {
-        const ethcallProvider = new Provider();
-        await ethcallProvider.init(provider);
+        const callProvider = new Provider();
+        await callProvider.init(provider);
         const calls = [];
         // Fetch asset metadata
         for (const assetAddress of assets) {
@@ -75,7 +75,7 @@ export default class Ethereum {
             calls.push(decimalCall);
         }
         // Fetch data
-        const data = await ethcallProvider.all(calls);
+        const data = await callProvider.all(calls);
         const metadata: Record<string, AssetMetadata> = {};
         for (let i = 0; i < assets.length; i++) {
             const assetAddress = assets[i];

@@ -9,7 +9,7 @@
                     class="logo"
                     :title="'brand'"
                 />
-                <span class="title">Balancer</span>
+                <span class="title">Yogi</span>
             </router-link>
             <a
                 v-if="isDev"
@@ -29,7 +29,7 @@
                 </div>
                 <a
                     class="link"
-                    href="https://pools.balancer.exchange"
+                    href="https://pools.yogi.fi"
                     target="_blank"
                 >
                     Invest
@@ -67,7 +67,7 @@ export default defineComponent({
         const commit = ref(APP_COMMIT || '');
         const commitLabel = computed(() => commit.value.substr(0, 6));
         const commitLink = computed(() => 
-            `https://github.com/balancer-labs/balancer-frontend/commit/${commit.value}`,
+            `https://github.com/yogi-fi/yogi-exchange/commit/${commit.value}`,
         );
 
         const mode = ref(Storage.isDarkmode());

@@ -20,7 +20,7 @@ const actions = {
         dispatch('fetchPrices');
     },
     fetchPrices: async({ commit }: ActionContext<PriceState, RootState>): Promise<void> => {
-        const assets = ['ethereum', 'balancer'];
+        const assets = ['bnb', 'yogi'];
         const prices = await getPrices(assets);
         commit('setPrices', prices);
     },

@@ -1,7 +1,7 @@
 import { ActionContext } from 'vuex';
 import { Web3Provider, Provider } from '@ethersproject/providers';
 
-import Ethereum, { Allowances, Balances } from '@/api/ethereum';
+import Chain, { Allowances, Balances } from '@/api/chain';
 import { RootState } from '@/store';
 import lock, { getConnectorName, getConnectorLogo } from '@/utils/connectors';
 import provider from '@/utils/provider';
@@ -173,7 +173,7 @@ const actions = {
         const metadata = rootGetters['assets/metadata'];
         const assets = Object.keys(metadata);
         console.time(`[API] fetchAccountState: ${address}`);
-        const { proxy, balances, allowances } = await Ethereum.fetchAccountState(address, assets);
+        const { proxy, balances, allowances } = await Chain.fetchAccountState(address, assets);
         console.timeEnd(`[API] fetchAccountState: ${address}`);
         commit('setProxy', proxy);
         commit('addBalances', balances);
@@ -185,7 +185,7 @@ const actions = {
             return;
         }
         console.time(`[API] fetchAccountState: ${address}`);
-        const { balances, allowances } = await Ethereum.fetchAccountState(address, assets);
+        const { balances, allowances } = await Chain.fetchAccountState(address, assets);
         console.timeEnd(`[API] fetchAccountState: ${address}`);
         commit('addBalances', balances);
         commit('addAllowances', allowances);

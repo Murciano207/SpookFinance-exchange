@@ -20,13 +20,6 @@
                     handleAmountChange(value);
                 }"
             />
-            <GasReimbursement
-                class="reimbursement-message"
-                :address-in="assetInAddressInput"
-                :address-out="assetOutAddressInput"
-                :pools="pools"
-                :swaps="swaps"
-            />
             <SwapButton
                 class="swap-button"
                 :address-in="assetInAddressInput"
@@ -63,12 +56,12 @@ import { useIntervalFn } from '@vueuse/core';
 import BigNumber from 'bignumber.js';
 import { getAddress } from '@ethersproject/address';
 import { ErrorCode } from '@ethersproject/logger';
-import { SOR } from '@balancer-labs/sor';
-import { Swap, Pool } from '@balancer-labs/sor/dist/types';
+import { SOR } from 'yogi-sor';
+import { Swap, Pool } from 'yogi-sor/dist/types';
 
 import config from '@/config';
 import provider from '@/utils/provider';
-import { ETH_KEY, scale, isAddress, getEtherscanLink } from '@/utils/helpers';
+import { NATIVE_TOKEN, scale, isAddress, getExplorerLink } from '@/utils/helpers';
 import { ValidationError, SwapValidation, validateNumberInput } from '@/utils/validation';
 import Storage from '@/utils/storage';
 import Swapper from '@/web3/swapper';
@@ -80,11 +73,9 @@ import Routing from '@/components/swap/Routing.vue';
 import Settings from '@/components/Settings.vue';
 import SwapButton from '@/components/swap/Button.vue';
 import SwapPair from '@/components/swap/Pair.vue';
-import GasReimbursement from '@/components/swap/GasReimbursement.vue';
-import { setGoal } from '@/utils/fathom';
 
 // eslint-disable-next-line no-undef
-const GAS_PRICE = process.env.APP_GAS_PRICE || '100000000000';
+const GAS_PRICE = process.env.APP_GAS_PRICE || '5000000000';
 const MAX_POOLS = 4;
 
 interface Pair {
@@ -99,7 +90,6 @@ export default defineComponent({
         Settings,
         SwapButton,
         SwapPair,
-        GasReimbursement,
     },
     setup() {
         let sor: SOR | undefined = undefined;
@@ -207,8 +197,8 @@ export default defineComponent({
         watch(assetOutAddressInput, async () => {
             Storage.saveOutputAsset(config.chainId, assetOutAddressInput.value);
             if (sor) {
-                const assetOutAddress = assetOutAddressInput.value === ETH_KEY
-                    ? config.addresses.weth
+                const assetOutAddress = assetOutAddressInput.value === NATIVE_TOKEN
+                    ? config.addresses.wbnb
                     : assetOutAddressInput.value;
                 await sor.setCostOutputToken(assetOutAddress);
             }
@@ -235,7 +225,6 @@ export default defineComponent({
             const assetInAddress = assetInAddressInput.value;
             const spender = config.addresses.exchangeProxy;
             const tx = await Helper.unlock(provider, assetInAddress, spender);
-            setGoal('approve');
             const metadata = store.getters['assets/metadata'];
             const assetSymbol = metadata[assetInAddress].symbol;
             const text = `Unlock ${assetSymbol}`;
@@ -255,7 +244,7 @@ export default defineComponent({
             const slippageBufferRate = Storage.getSlippage();
             const provider = await store.getters['account/provider'];
             if (isWrapPair(assetInAddress, assetOutAddress)) {
-                if (assetInAddress === ETH_KEY) {
+                if (assetInAddress === NATIVE_TOKEN) {
                     const tx = await Helper.wrap(provider, assetInAmount);
                     const text = 'Wrap ether';
                     await handleTransaction(tx, text);
@@ -264,7 +253,7 @@ export default defineComponent({
                     const text = 'Unwrap ether';
                     await handleTransaction(tx, text);
                 }
-                store.dispatch('account/fetchAssets', [ config.addresses.weth ]);
+                store.dispatch('account/fetchAssets', [ config.addresses.wbnb ]);
                 return;
             }
             const assetInSymbol = metadata[assetInAddress].symbol;
@@ -276,12 +265,10 @@ export default defineComponent({
                 const minAmount = assetOutAmount.div(1 + slippageBufferRate).integerValue(BigNumber.ROUND_DOWN);
                 const tx = await Swapper.swapIn(provider, swaps.value, assetInAddress, assetOutAddress, assetInAmount, minAmount);
                 await handleTransaction(tx, text);
-                setGoal('swapIn');
             } else {
                 const assetInAmountMax = assetInAmount.times(1 + slippageBufferRate).integerValue(BigNumber.ROUND_DOWN);
                 const tx = await Swapper.swapOut(provider, swaps.value, assetInAddress, assetOutAddress, assetInAmountMax);
                 await handleTransaction(tx, text);
-                setGoal('swapOut');
             }
             store.dispatch('account/fetchAssets', [ assetInAddress, assetOutAddress ]);
             if (sor) {
@@ -291,20 +278,19 @@ export default defineComponent({
         }
 
         async function initSor(): Promise<void> {
-            const poolsUrl = `${config.subgraphBackupUrl}?timestamp=${Date.now()}`;
             sor = new SOR(
                 provider,
                 new BigNumber(GAS_PRICE),
                 MAX_POOLS,
                 config.chainId,
-                poolsUrl,
+                config.subgraphUrl,
             );
 
-            const assetInAddress = assetInAddressInput.value === ETH_KEY
-                ? config.addresses.weth
+            const assetInAddress = assetInAddressInput.value === NATIVE_TOKEN
+                ? config.addresses.wbnb
                 : assetInAddressInput.value;
-            const assetOutAddress = assetOutAddressInput.value === ETH_KEY
-                ? config.addresses.weth
+            const assetOutAddress = assetOutAddressInput.value === NATIVE_TOKEN
+                ? config.addresses.wbnb
                 : assetOutAddressInput.value;
             console.time(`[SOR] setCostOutputToken: ${assetOutAddress}`);
             await sor.setCostOutputToken(assetOutAddress);
@@ -343,11 +329,11 @@ export default defineComponent({
                 return;
             }
 
-            const assetInAddress = assetInAddressInput.value === ETH_KEY
-                ? config.addresses.weth
+            const assetInAddress = assetInAddressInput.value === NATIVE_TOKEN
+                ? config.addresses.wbnb
                 : assetInAddressInput.value;
-            const assetOutAddress = assetOutAddressInput.value === ETH_KEY
-                ? config.addresses.weth
+            const assetOutAddress = assetOutAddressInput.value === NATIVE_TOKEN
+                ? config.addresses.wbnb
                 : assetOutAddressInput.value;
 
             if (assetInAddress === assetOutAddress) {
@@ -421,11 +407,12 @@ export default defineComponent({
         async function handleTransaction(transaction: any, text: string): Promise<void> {
             if (transaction.code) {
                 transactionPending.value = false;
+		// FIXME: Discord url
                 if (transaction.code === ErrorCode.UNPREDICTABLE_GAS_LIMIT) {
                     store.dispatch('ui/notify', {
                         text: `${text} failed`,
                         type: 'warning',
-                        link: 'https://help.balancer.finance',
+                        link: 'https://yogi.fi',
                     });
                 }
                 return;
@@ -446,7 +433,7 @@ export default defineComponent({
             const type = transactionReceipt.status === 1
                 ? 'success'
                 : 'error';
-            const link = getEtherscanLink(transactionReceipt.transactionHash);
+            const link = getExplorerLink(transactionReceipt.transactionHash);
             store.dispatch('ui/notify', {
                 text,
                 type,
@@ -491,10 +478,10 @@ export default defineComponent({
         }
 
         function isWrapPair(assetIn: string, assetOut: string): boolean {
-            if (assetIn === ETH_KEY && assetOut === config.addresses.weth) {
+            if (assetIn === NATIVE_TOKEN && assetOut === config.addresses.wbnb) {
                 return true;
             }
-            if (assetOut === ETH_KEY && assetIn === config.addresses.weth) {
+            if (assetOut === NATIVE_TOKEN && assetIn === config.addresses.wbnb) {
                 return true;
             }
             return false;

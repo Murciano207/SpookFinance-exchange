@@ -1,6 +1,6 @@
 import { ActionContext } from 'vuex';
 
-import Ethereum from '@/api/ethereum';
+import Chain from '@/api/chain';
 import { RootState } from '@/store';
 import config, { AssetMetadata } from '@/config';
 import { TokenList, DEFAULT_LIST, listMetadata, getTokenlist, getAssetsFromTokenlist } from '@/utils/list';
@@ -51,7 +51,7 @@ const actions = {
     },
     fetchMetadata: async({ commit }: ActionContext<AssetState, RootState>, assets: string[]): Promise<void> => {
         console.time(`[API] fetchAssetMetadata: N=${assets.length}`);
-        const metadata = await Ethereum.fetchAssetMetadata(assets);
+        const metadata = await Chain.fetchAssetMetadata(assets);
         console.timeEnd(`[API] fetchAssetMetadata: N=${assets.length}`);
         Storage.saveAssets(config.chainId, metadata);
         commit('addCustomMetadata', metadata);

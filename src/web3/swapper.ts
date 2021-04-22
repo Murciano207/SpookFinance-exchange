@@ -2,14 +2,14 @@ import BigNumber from 'bignumber.js';
 import { Contract } from '@ethersproject/contracts';
 import { ErrorCode } from '@ethersproject/logger';
 import { Web3Provider } from '@ethersproject/providers';
-import { Swap } from '@balancer-labs/sor/dist/types';
+import { Swap } from 'yogi-sor/dist/types';
 
 import ExchangeProxyABI from '../abi/ExchangeProxy.json';
 
 import config from '@/config';
-import { ETH_KEY, logRevertedTx } from '@/utils/helpers';
+import { NATIVE_TOKEN, logRevertedTx } from '@/utils/helpers';
 
-const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
+const BNB_ADDRESS = '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB';
 const exchangeProxyAddress = config.addresses.exchangeProxy;
 
 export default class Swapper {
@@ -22,12 +22,12 @@ export default class Swapper {
         assetOutAmountMin: BigNumber,
     ): Promise<any> {
         const overrides: any = {};
-        if (assetInAddress === ETH_KEY) {
-            assetInAddress = ETH_ADDRESS;
+        if (assetInAddress === NATIVE_TOKEN) {
+            assetInAddress = BNB_ADDRESS;
             overrides.value = `0x${assetInAmount.toString(16)}`;
         }
-        if (assetOutAddress === ETH_KEY) {
-            assetOutAddress = ETH_ADDRESS;
+        if (assetOutAddress === NATIVE_TOKEN) {
+            assetOutAddress = BNB_ADDRESS;
         }
         const exchangeProxyContract = new Contract(exchangeProxyAddress, ExchangeProxyABI, provider.getSigner());
         try {
@@ -68,12 +68,12 @@ export default class Swapper {
         assetInAmountMax: BigNumber,
     ): Promise<any> {
         const overrides: any = {};
-        if (assetInAddress === ETH_KEY) {
-            assetInAddress = ETH_ADDRESS;
+        if (assetInAddress === NATIVE_TOKEN) {
+            assetInAddress = BNB_ADDRESS;
             overrides.value = `0x${assetInAmountMax.toString(16)}`;
         }
-        if (assetOutAddress === ETH_KEY) {
-            assetOutAddress = ETH_ADDRESS;
+        if (assetOutAddress === NATIVE_TOKEN) {
+            assetOutAddress = BNB_ADDRESS;
         }
         const exchangeProxyContract = new Contract(exchangeProxyAddress, ExchangeProxyABI, provider.getSigner());
         try {

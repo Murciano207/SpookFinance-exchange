@@ -4,7 +4,7 @@ import { ActionContext } from 'vuex';
 import Helper from '@/web3/helper';
 
 // eslint-disable-next-line no-undef
-const DEFAULT_PRICE = process.env.APP_GAS_PRICE || '100000000000';
+const DEFAULT_PRICE = process.env.APP_GAS_PRICE || '5000000000';
 
 export interface GasState {
     price: string;

@@ -3,7 +3,7 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_weth",
+                "name": "_wbnb",
                 "type": "address"
             }
         ],

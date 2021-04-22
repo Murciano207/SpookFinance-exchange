@@ -154,20 +154,17 @@ export default class Storage {
 }
 
 function getPreferences(): Preferences {
+    // FIXME: configure yogi token
     const defaultPreferences: Preferences = {
         connector: null,
         slippage: 0.01,
         pairs: {
-            1: {
-                inputAsset: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-                outputAsset: '0xba100000625a3754423978a60c9317c58a424e3D',
-            },
-            42: {
-                inputAsset: '0x1528F3FCc26d13F7079325Fb78D9442607781c8C',
-                outputAsset: '0xef13C0c8abcaf5767160018d268f9697aE4f5375',
-            },
+            56: {
+                inputAsset: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+                outputAsset: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+            }
         },
-        list: 'balancer',
+        list: 'yogi',
         darkmode: true,
     };
     const preferenceString = localStorage.getItem(PREFERENCES);

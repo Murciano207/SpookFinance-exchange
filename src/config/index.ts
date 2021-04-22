@@ -1,5 +1,4 @@
-import homestead from './homestead.json';
-import kovan from './kovan.json';
+import bsc from './bsc.json';
 
 interface Connector {
     id: string;
@@ -18,17 +17,15 @@ export interface AssetMetadata {
 interface Config {
     network: string;
     chainId: number;
+    rpc: string[];
     precision: number;
-    infuraKey: string;
-    alchemyKey: string;
     subgraphUrl: string;
-    subgraphBackupUrl: string;
     addresses: {
         bFactory: string;
         bActions: string;
         dsProxyRegistry: string;
         exchangeProxy: string;
-        weth: string;
+        wbnb: string;
         multicall: string;
     };
     assets: Record<string, AssetMetadata>;
@@ -37,17 +34,13 @@ interface Config {
 }
 
 const configs = {
-    1: {
+    56: {
         untrusted: [],
-        ...homestead,
-    },
-    42:{
-        untrusted: [],
-        ...kovan,
+        ...bsc,
     },
 };
 // eslint-disable-next-line no-undef
-const network = process.env.APP_CHAIN_ID || 1;
+const network = process.env.APP_CHAIN_ID || 56;
 
 const config: Config = configs[network];
 
