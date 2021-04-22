@@ -57,7 +57,7 @@ export default class Helper {
         } catch(e) {
             if (e.code === ErrorCode.UNPREDICTABLE_GAS_LIMIT) {
                 const sender = await provider.getSigner().getAddress();
-                logRevertedTx(sender, wethContract, 'withdraw', [amount.toString()], {});
+                logRevertedTx(sender, wbnbContract, 'withdraw', [amount.toString()], {});
             }
             return e;
         }

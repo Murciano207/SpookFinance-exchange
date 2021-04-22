@@ -23,11 +23,6 @@ export const DEFAULT_LIST = 'yogi';
 
 export const listMetadata: Record<string, string> = {
     [DEFAULT_LIST]: '',
-    '1inch': 'http://tokens.1inch.eth.link',
-    'coingecko': 'https://tokens.coingecko.com/uniswap/all.json',
-    'compound': 'https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json',
-    'zapper': 'https://zapper.fi/api/token-list',
-    'zerion': 'http://tokenlist.zerion.eth.link',
 };
 
 export async function getTokenlist(id: string): Promise<TokenList> {
