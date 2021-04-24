@@ -221,7 +221,6 @@ export default defineComponent({
     height: 32px;
     border-radius: 50%;
     margin-left: 10px;
-    background-color: white;
 }
 
 .asset-symbol {
