@@ -61,7 +61,7 @@ export function getPoolLink(pool: string): string {
 }
 
 export function getAssetLogo(address: string): string {
-    return `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/assets/${address}/logo.png`;
+    return `https://raw.githubusercontent.com/yogi-fi/yogi-assets/master/assets/${address}.png`;
 }
 
 export function logRevertedTx(
