@@ -154,14 +154,13 @@ export default class Storage {
 }
 
 function getPreferences(): Preferences {
-    // FIXME: configure yogi token
     const defaultPreferences: Preferences = {
         connector: null,
         slippage: 0.01,
         pairs: {
             56: {
                 inputAsset: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-                outputAsset: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+                outputAsset: '0xa20FFbd8c1541E31145a9C8d34833fd4b2BC90e5',
             }
         },
         list: 'yogi',

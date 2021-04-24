@@ -407,12 +407,11 @@ export default defineComponent({
         async function handleTransaction(transaction: any, text: string): Promise<void> {
             if (transaction.code) {
                 transactionPending.value = false;
-		// FIXME: Discord url
-                if (transaction.code === ErrorCode.UNPREDICTABLE_GAS_LIMIT) {
+		        if (transaction.code === ErrorCode.UNPREDICTABLE_GAS_LIMIT) {
                     store.dispatch('ui/notify', {
                         text: `${text} failed`,
                         type: 'warning',
-                        link: 'https://yogi.fi',
+                        link: 'https://discord.gg/AmtTyY5gzq',
                     });
                 }
                 return;
