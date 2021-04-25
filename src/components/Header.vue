@@ -25,14 +25,14 @@
                 <div
                     class="link active"
                 >
-                    Trade
+                    Swap
                 </div>
                 <a
                     class="link"
                     href="https://pools.yogi.fi"
                     target="_blank"
                 >
-                    Invest
+                    Pool
                 </a>
             </div>
         </div>
