@@ -56,17 +56,17 @@ button.primary {
     border: none;
     border-radius: 2rem;
     background-color: var(--btn-bg);
-    color: #fff;
+    color: var(--btn-font);
     transition: .1s background ease-out;
 }
 
 button.primary:hover {
     color: #fff;
-    background-color: #02566f;
+    background-color: #59b566;
 }
 
 button.primary:active {
-    background-color: #92dd50;
+    background-color: #02566f;
 }
 
 button:disabled,

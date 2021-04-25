@@ -92,17 +92,20 @@ export default defineComponent({
     --block-height: 50px;
     --pair-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     --btn-bg: #21222c;
+    --btn-font: #fff;
 }
 
 [data-theme="dark"] {
-    --background-primary: #1c1d26;
+    --background-primary: rgb(11, 12, 24);
     --background-secondary: #21222c;
     --background-control: #1f2029;
     --background-hover: #20222c;
     --border: #333;
     --text-primary: #fff;
     --text-secondary: #98aab4;
-    --pair-shadow: rgba(180, 180, 180, 0.12) 0px 1px 3px, rgba(180, 180, 180, 0.24) 0px 1px 2px;;
+    --pair-shadow: none;
+    --btn-bg: #ccc;
+    --btn-font: #000;
 }
 
 body {
