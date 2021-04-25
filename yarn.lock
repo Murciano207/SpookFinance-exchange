@@ -8381,8 +8381,8 @@ yargs@^13.2.4, yargs@^13.3.2:
     yargs-parser "^13.1.2"
 
 yogi-assets@yogi-fi/yogi-assets#master:
-  version "1.0.0"
-  resolved "https://codeload.github.com/yogi-fi/yogi-assets/tar.gz/df7ba2728a7c9151a0190dadbbbc8b2d93729c41"
+  version "1.0.1"
+  resolved "https://codeload.github.com/yogi-fi/yogi-assets/tar.gz/4b079719cc0e05a879a846d884e4025ac8c9e468"
 
 yogi-sor@yogi-fi/yogi-sor#master:
   version "1.0.0"
