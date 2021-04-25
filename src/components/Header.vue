@@ -1,16 +1,16 @@
 <template>
     <div class="header">
         <div class="header-left">
-            <router-link
+            <a
                 class="brand"
-                :to="'/'"
+                href="https://yogi.fi"
             >
                 <Icon
                     class="logo"
                     :title="'brand'"
                 />
                 <span class="title">Yogi</span>
-            </router-link>
+            </a>
             <a
                 v-if="isDev"
                 :href="commitLink"
@@ -32,7 +32,14 @@
                     href="https://pools.yogi.fi"
                     target="_blank"
                 >
-                    Pool
+                    Pools
+                </a>
+                <a
+                    class="link"
+                    href="https://docs.yogi.fi"
+                    target="_blank"
+                >
+                    Docs
                 </a>
             </div>
         </div>
