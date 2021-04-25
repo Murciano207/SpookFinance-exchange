@@ -4,6 +4,7 @@
             <a
                 class="brand"
                 href="https://yogi.fi"
+                target="_blank"
             >
                 <Icon
                     class="logo"
