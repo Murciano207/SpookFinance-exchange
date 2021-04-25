@@ -17,7 +17,7 @@
         "https://bsc-dataseed4.binance.org/"  
     ],
     "precision": 6,
-    "subgraphUrl": "https://api.thegraph.com/subgraphs/name/lkynes/sg8871",
+    "subgraphUrl": "https://api.thegraph.com/subgraphs/name/yogi-fi/yogi-subgraph",
     "addresses": {
         "bFactory": "0x63BA45F4Af4Ca1B49BEA0c8d434CFcB0F5f6F828",
         "bActions": "0xadEED4642549e69a695C866EfAd81841a61fF226",
