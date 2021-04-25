@@ -43,11 +43,9 @@ button {
     font-weight: bold;
     color: var(--text-primary);
     background: var(--background-control);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--border);
     border-radius: var(--border-radius-medium);
     cursor: pointer;
-    transition: box-shadow 0.25s, transform 0.25s;
 }
 
 button:hover {
@@ -55,13 +53,20 @@ button:hover {
 }
 
 button.primary {
-    background: linear-gradient(185deg, #f0f 0%, #00f 100%);
+    border: none;
+    border-radius: 2rem;
+    background-color: var(--btn-bg);
     color: #fff;
+    transition: .1s background ease-out;
 }
 
 button.primary:hover {
-    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    color: #fff;
+    background-color: #02566f;
+}
+
+button.primary:active {
+    background-color: #92dd50;
 }
 
 button:disabled,

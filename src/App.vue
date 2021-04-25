@@ -67,7 +67,7 @@ export default defineComponent({
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 :root {
     --background-primary: #fafafa;
@@ -90,6 +90,8 @@ export default defineComponent({
     --border-radius-medium: 10px;
     --border-radius-small: 5px;
     --block-height: 50px;
+    --pair-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    --btn-bg: #21222c;
 }
 
 [data-theme="dark"] {
@@ -100,6 +102,7 @@ export default defineComponent({
     --border: #333;
     --text-primary: #fff;
     --text-secondary: #98aab4;
+    --pair-shadow: rgba(180, 180, 180, 0.12) 0px 1px 3px, rgba(180, 180, 180, 0.24) 0px 1px 2px;;
 }
 
 body {
