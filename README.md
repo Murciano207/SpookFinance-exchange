@@ -16,3 +16,7 @@ npm install
 npm run serve
 npm run build
 ```
+
+## License
+
+[GPL-3.0](LICENSE).
