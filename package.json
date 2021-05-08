@@ -21,8 +21,6 @@
     "@ethersproject/logger": "^5.1.0",
     "@ethersproject/providers": "^5.1.0",
     "@ethersproject/wallet": "^5.1.0",
-    "yogi-assets": "yogi-fi/yogi-assets#master",
-    "yogi-sor": "yogi-fi/yogi-sor#master",
     "@metamask/jazzicon": "^2.0.0",
     "@snapshot-labs/lock": "snapshot-labs/lock#a3694bb6b6e615968ee6e04e9a97007eace18c28",
     "@vueuse/core": "^4.7.0",
@@ -32,7 +30,9 @@
     "dotenv-webpack": "^2.0.0",
     "vue": "^3.0.2",
     "vue-router": "^4.0.0-rc.6",
-    "vuex": "^4.0.0-rc.2"
+    "vuex": "^4.0.0-rc.2",
+    "yogi-assets": "yogi-fi/yogi-assets#master",
+    "yogi-sor": "yogi-fi/yogi-sor#master"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.29.0",
