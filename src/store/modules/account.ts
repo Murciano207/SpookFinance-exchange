@@ -6,6 +6,7 @@ import { RootState } from '@/store';
 import lock, { getConnectorName, getConnectorLogo } from '@/utils/connectors';
 import provider from '@/utils/provider';
 import Storage from '@/utils/storage';
+import config from '@/config';
 
 enum TransactionStatus {
     PENDING,
@@ -117,6 +118,9 @@ const actions = {
             dispatch('disconnect');
             return;
         }
+        if (provider.chainId !== config.chainId) {
+            await dispatch('changeSubdomain', parseInt(provider.chainId, 16));
+        }
         const web3Provider = new Web3Provider(provider);
         const accounts = await web3Provider.listAccounts();
         if (accounts.length === 0) {
@@ -125,6 +129,15 @@ const actions = {
         }
         dispatch('saveProvider', provider);
         Storage.saveConnector(connectorId);
+    },
+    changeSubdomain: async ({ }, chainId: number) => {
+        if (chainId === 56) {
+            location.replace('https://bsc.exchange.yogi.fi');
+        } else if (chainId === 137) {
+            location.replace('https://polygon.exchange.yogi.fi');
+        } else {
+            console.warn('unsupported chain', chainId);
+        }
     },
     disconnect: async({ commit }: ActionContext<AccountState, RootState>): Promise<void> => {
         const connectorId = Storage.getConnector();

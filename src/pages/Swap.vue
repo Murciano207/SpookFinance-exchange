@@ -76,7 +76,7 @@ import SwapPair from '@/components/swap/Pair.vue';
 
 // eslint-disable-next-line no-undef
 const GAS_PRICE = process.env.APP_GAS_PRICE || '5000000000';
-const MAX_POOLS = 4;
+const MAX_POOLS = Number(process.env.APP_MAX_POOLS) || 8;
 
 interface Pair {
     assetIn: string;
