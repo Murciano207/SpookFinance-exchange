@@ -118,8 +118,9 @@ const actions = {
             dispatch('disconnect');
             return;
         }
-        if (provider.chainId !== config.chainId) {
-            await dispatch('changeSubdomain', parseInt(provider.chainId, 16));
+        const chainId = parseInt(provider.chainId, 16);
+        if (chainId !== config.chainId) {
+            await dispatch('changeSubdomain', chainId);
         }
         const web3Provider = new Web3Provider(provider);
         const accounts = await web3Provider.listAccounts();
