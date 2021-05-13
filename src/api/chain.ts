@@ -32,7 +32,7 @@ export default class Chain {
             calls.push(balanceCall);
             calls.push(allowanceCall);
         }
-        // Fetch bnb balance
+        // Fetch native balance
         const balanceCall = callProvider.getBalance(address);
         calls.push(balanceCall);
         // Fetch proxy
@@ -55,7 +55,7 @@ export default class Chain {
             allowances[exchangeProxyAddress][assetAddress] = data[2 * i + 1].toString();
             i++;
         }
-        balances.bnb = data[2 * assetCount].toString();
+        balances[config.native] = data[2 * assetCount].toString();
         const proxy = data[2 * assetCount + 1];
         return { allowances, balances, proxy };
     }

@@ -8,7 +8,7 @@ import { logRevertedTx } from '@/utils/helpers';
 import config from '@/config';
 
 import ERC20Abi from '../abi/ERC20.json';
-import WbnbAbi from '../abi/Wbnb.json';
+import WnativeAbi from '../abi/Wnative.json';
 
 export default class Helper {
     static async unlock(
@@ -32,16 +32,16 @@ export default class Helper {
         provider: Web3Provider,
         amount: BigNumber,
     ): Promise<any> {
-        const wbnbContract = new Contract(config.addresses.wbnb, WbnbAbi, provider.getSigner());
+        const wnativeContract = new Contract(config.addresses.wnative, WnativeAbi, provider.getSigner());
         const overrides = {
             value: `0x${amount.toString(16)}`,
         };
         try {
-            return await wbnbContract.deposit(overrides);
+            return await wnativeContract.deposit(overrides);
         } catch(e) {
             if (e.code === ErrorCode.UNPREDICTABLE_GAS_LIMIT) {
                 const sender = await provider.getSigner().getAddress();
-                logRevertedTx(sender, wbnbContract, 'deposit', [], overrides);
+                logRevertedTx(sender, wnativeContract, 'deposit', [], overrides);
             }
             return e;
         }
@@ -51,13 +51,13 @@ export default class Helper {
         provider: Web3Provider,
         amount: BigNumber,
     ): Promise<any> {
-        const wbnbContract = new Contract(config.addresses.wbnb, WbnbAbi, provider.getSigner());
+        const wnativeContract = new Contract(config.addresses.wnative, WnativeAbi, provider.getSigner());
         try {
-            return await wbnbContract.withdraw(amount.toString(), {});
+            return await wnativeContract.withdraw(amount.toString(), {});
         } catch(e) {
             if (e.code === ErrorCode.UNPREDICTABLE_GAS_LIMIT) {
                 const sender = await provider.getSigner().getAddress();
-                logRevertedTx(sender, wbnbContract, 'withdraw', [amount.toString()], {});
+                logRevertedTx(sender, wnativeContract, 'withdraw', [amount.toString()], {});
             }
             return e;
         }

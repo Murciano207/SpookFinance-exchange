@@ -2,7 +2,7 @@ import tokenlist from 'yogi-assets/generated/listed.tokenlist.json';
 
 import config, { AssetMetadata } from '@/config';
 
-const BNB_LOGO = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/smartchain/info/logo.png';
+const NATIVE_LOGO = `https://raw.githubusercontent.com/yogi-fi/yogi-assets/master/assets/${config.chainId}/native.png`;
 
 export interface TokenList {
     name: string;
@@ -37,13 +37,13 @@ export async function getTokenlist(id: string): Promise<TokenList> {
 
 export function getAssetsFromTokenlist(chainId: number, list: TokenList): Record<string, AssetMetadata> {
     const assets: Record<string, AssetMetadata> = {};
-    if (list.tokens.findIndex(token => token.address === config.addresses.wbnb) !== -1) {
-        assets.bnb = {
-            address: 'bnb',
-            name: 'BNB',
-            symbol: 'BNB',
+    if (list.tokens.findIndex(token => token.address === config.addresses.wnative) !== -1) {
+        assets[config.native] = {
+            address: config.native,
+            name: config.native.toUpperCase(),
+            symbol: config.native.toUpperCase(),
             decimals: 18,
-            logoURI: BNB_LOGO,
+            logoURI: NATIVE_LOGO,
         };
     }
     for (const token of list.tokens) {
