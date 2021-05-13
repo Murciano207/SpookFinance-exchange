@@ -8,7 +8,7 @@ import { logRevertedTx } from '@/utils/helpers';
 import config from '@/config';
 
 import ERC20Abi from '../abi/ERC20.json';
-import WnativeAbi from '../abi/Wnative.json';
+import WNativeAbi from '../abi/WNative.json';
 
 export default class Helper {
     static async unlock(
@@ -32,7 +32,7 @@ export default class Helper {
         provider: Web3Provider,
         amount: BigNumber,
     ): Promise<any> {
-        const wnativeContract = new Contract(config.addresses.wnative, WnativeAbi, provider.getSigner());
+        const wnativeContract = new Contract(config.addresses.wnative, WNativeAbi, provider.getSigner());
         const overrides = {
             value: `0x${amount.toString(16)}`,
         };
@@ -51,7 +51,7 @@ export default class Helper {
         provider: Web3Provider,
         amount: BigNumber,
     ): Promise<any> {
-        const wnativeContract = new Contract(config.addresses.wnative, WnativeAbi, provider.getSigner());
+        const wnativeContract = new Contract(config.addresses.wnative, WNativeAbi, provider.getSigner());
         try {
             return await wnativeContract.withdraw(amount.toString(), {});
         } catch(e) {
