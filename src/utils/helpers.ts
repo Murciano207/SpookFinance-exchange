@@ -56,7 +56,7 @@ export function getPoolLink(pool: string): string {
 }
 
 export function getAssetLogo(address: string): string {
-    return `https://raw.githubusercontent.com/yogi-fi/yogi-assets/master/assets/${config.chainId}/${this.address}.png`;
+    return `https://raw.githubusercontent.com/yogi-fi/yogi-assets/master/assets/${config.chainId}/${address}.png`;
 }
 
 export function logRevertedTx(
