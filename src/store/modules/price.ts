@@ -22,7 +22,6 @@ const actions = {
     fetchPrices: async({ commit }: ActionContext<PriceState, RootState>): Promise<void> => {
         const assets = ['ETH', 'USDT'];
         const prices = await getPrices(assets);
-        console.log('PRICES', prices);
         commit('setPrices', prices);
     },
 };
