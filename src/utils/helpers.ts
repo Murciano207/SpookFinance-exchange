@@ -4,8 +4,7 @@ import { Contract } from '@ethersproject/contracts';
 import { Wallet } from '@ethersproject/wallet';
 
 import provider from '@/utils/provider';
-
-export const NATIVE_TOKEN = 'bnb';
+import config from '@/config';
 
 export function formatAddress(address: string, length = 8): string {
     const ellipsizedAddress = `${address.substr(0, 2 + length / 2)}…${address.substr(42 - length / 2)}`;
@@ -48,20 +47,16 @@ export function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(() => resolve(), ms));
 }
 
-export function getExplorerLink(txHash: string): string {
-    return `https://bscscan.com/tx/${txHash}`;
-}
-
-export function getAccountLink(address: string): string {
-    return `https://bscscan.com/address/${address}`;
+export function getExplorerLink(txHash: string, type: string = 'address'): string {
+    return `${config.explorer}/${type}/${txHash}`;
 }
 
 export function getPoolLink(pool: string): string {
-    return `https://pools.yogi.fi/#/pool/${pool}`;
+    return `${config.poolsUrl}/#/pool/${pool}`;
 }
 
 export function getAssetLogo(address: string): string {
-    return `https://raw.githubusercontent.com/yogi-fi/yogi-assets/master/assets/${address}.png`;
+    return `https://raw.githubusercontent.com/yogi-fi/yogi-assets/master/assets/${config.chainId}/${this.address}.png`;
 }
 
 export function logRevertedTx(

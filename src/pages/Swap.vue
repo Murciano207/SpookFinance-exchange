@@ -61,7 +61,7 @@ import { Swap, Pool } from 'yogi-sor/dist/types';
 
 import config from '@/config';
 import provider from '@/utils/provider';
-import { NATIVE_TOKEN, scale, isAddress, getExplorerLink } from '@/utils/helpers';
+import { scale, isAddress, getExplorerLink } from '@/utils/helpers';
 import { ValidationError, SwapValidation, validateNumberInput } from '@/utils/validation';
 import Storage from '@/utils/storage';
 import Swapper from '@/web3/swapper';
@@ -197,8 +197,8 @@ export default defineComponent({
         watch(assetOutAddressInput, async () => {
             Storage.saveOutputAsset(config.chainId, assetOutAddressInput.value);
             if (sor) {
-                const assetOutAddress = assetOutAddressInput.value === NATIVE_TOKEN
-                    ? config.addresses.wbnb
+                const assetOutAddress = assetOutAddressInput.value === config.native
+                    ? config.addresses.wnative
                     : assetOutAddressInput.value;
                 await sor.setCostOutputToken(assetOutAddress);
             }
@@ -244,7 +244,7 @@ export default defineComponent({
             const slippageBufferRate = Storage.getSlippage();
             const provider = await store.getters['account/provider'];
             if (isWrapPair(assetInAddress, assetOutAddress)) {
-                if (assetInAddress === NATIVE_TOKEN) {
+                if (assetInAddress === config.native) {
                     const tx = await Helper.wrap(provider, assetInAmount);
                     const text = 'Wrap ether';
                     await handleTransaction(tx, text);
@@ -253,7 +253,7 @@ export default defineComponent({
                     const text = 'Unwrap ether';
                     await handleTransaction(tx, text);
                 }
-                store.dispatch('account/fetchAssets', [ config.addresses.wbnb ]);
+                store.dispatch('account/fetchAssets', [ config.addresses.wnative ]);
                 return;
             }
             const assetInSymbol = metadata[assetInAddress].symbol;
@@ -286,11 +286,11 @@ export default defineComponent({
                 config.subgraphUrl,
             );
 
-            const assetInAddress = assetInAddressInput.value === NATIVE_TOKEN
-                ? config.addresses.wbnb
+            const assetInAddress = assetInAddressInput.value === config.native
+                ? config.addresses.wnative
                 : assetInAddressInput.value;
-            const assetOutAddress = assetOutAddressInput.value === NATIVE_TOKEN
-                ? config.addresses.wbnb
+            const assetOutAddress = assetOutAddressInput.value === config.native
+                ? config.addresses.wnative
                 : assetOutAddressInput.value;
             console.time(`[SOR] setCostOutputToken: ${assetOutAddress}`);
             await sor.setCostOutputToken(assetOutAddress);
@@ -329,11 +329,11 @@ export default defineComponent({
                 return;
             }
 
-            const assetInAddress = assetInAddressInput.value === NATIVE_TOKEN
-                ? config.addresses.wbnb
+            const assetInAddress = assetInAddressInput.value === config.native
+                ? config.addresses.wnative
                 : assetInAddressInput.value;
-            const assetOutAddress = assetOutAddressInput.value === NATIVE_TOKEN
-                ? config.addresses.wbnb
+            const assetOutAddress = assetOutAddressInput.value === config.native
+                ? config.addresses.wnative
                 : assetOutAddressInput.value;
 
             if (assetInAddress === assetOutAddress) {
@@ -432,7 +432,7 @@ export default defineComponent({
             const type = transactionReceipt.status === 1
                 ? 'success'
                 : 'error';
-            const link = getExplorerLink(transactionReceipt.transactionHash);
+            const link = getExplorerLink(transactionReceipt.transactionHash, 'tx');
             store.dispatch('ui/notify', {
                 text,
                 type,
@@ -477,10 +477,10 @@ export default defineComponent({
         }
 
         function isWrapPair(assetIn: string, assetOut: string): boolean {
-            if (assetIn === NATIVE_TOKEN && assetOut === config.addresses.wbnb) {
+            if (assetIn === config.native && assetOut === config.addresses.wnative) {
                 return true;
             }
-            if (assetOut === NATIVE_TOKEN && assetIn === config.addresses.wbnb) {
+            if (assetOut === config.native && assetIn === config.addresses.wnative) {
                 return true;
             }
             return false;

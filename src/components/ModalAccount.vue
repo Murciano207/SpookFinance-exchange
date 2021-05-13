@@ -32,7 +32,7 @@
                             </div>
                             <a
                                 class="account-link account-wallet-icon"
-                                :href="getAccountLink(address)"
+                                :href="getExplorerLink(address)"
                                 target="_blank"
                             >
                                 <Icon
@@ -99,7 +99,7 @@ import { useStore } from 'vuex';
 
 import { RootState } from '@/store';
 import { scale } from '@/utils/helpers';
-import { formatAddress, getAccountLink } from '@/utils/helpers';
+import { formatAddress, getExplorerLink } from '@/utils/helpers';
 import config from '@/config';
 
 import AssetIcon from '@/components/AssetIcon.vue';
@@ -172,7 +172,6 @@ export default defineComponent({
             balances,
 
             formatAddress,
-            getAccountLink,
 
             copyAddress,
             disconnect,

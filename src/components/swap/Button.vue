@@ -15,7 +15,7 @@ import { useStore } from 'vuex';
 
 import config from '@/config';
 import { RootState } from '@/store';
-import { NATIVE_TOKEN, scale } from '@/utils/helpers';
+import { scale } from '@/utils/helpers';
 import { SwapValidation } from '@/utils/validation';
 
 import Button from '@/components/Button.vue';
@@ -145,7 +145,7 @@ export default defineComponent({
             if (!addressIn.value) {
                 return true;
             }
-            if (addressIn.value === NATIVE_TOKEN) {
+            if (addressIn.value === config.native) {
                 return true;
             }
             if (isWrapPair(addressIn.value, addressOut.value)) {
@@ -182,10 +182,10 @@ export default defineComponent({
         }
 
         function isWrapPair(assetIn: string, assetOut: string): boolean {
-            if (assetIn === NATIVE_TOKEN && assetOut === config.addresses.wbnb) {
+            if (assetIn === config.native && assetOut === config.addresses.wnative) {
                 return true;
             }
-            if (assetOut === NATIVE_TOKEN && assetIn === config.addresses.wbnb) {
+            if (assetOut === config.native && assetIn === config.addresses.wnative) {
                 return true;
             }
             return false;

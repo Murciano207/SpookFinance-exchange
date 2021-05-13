@@ -161,6 +161,11 @@ function getPreferences(): Preferences {
             56: {
                 inputAsset: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
                 outputAsset: '0xa20FFbd8c1541E31145a9C8d34833fd4b2BC90e5',
+            },
+            // FIXME: update this once Yogi is deployed on mainnet
+            137: {
+                inputAsset: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+                outputAsset: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
             }
         },
         list: 'yogi',

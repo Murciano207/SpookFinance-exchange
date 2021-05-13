@@ -1,25 +1,25 @@
 {
-    "network": "bsc",
-    "chainId": 56,
-    "native": "bnb",
-    "rpc": ["https://bsc-dataseed.binance.org/"],
+    "network": "polygon",
+    "chainId": 137,
+    "native": "matic",
+    "rpc": ["https://rpc-mainnet.maticvigil.com/"],
     "precision": 6,
-    "subgraphUrl": "https://api.thegraph.com/subgraphs/name/yogi-fi/bsc",
-    "explorer": "https://bscscan.com",
-    "poolsUrl": "http://bsc.pools.yogi.fi",
+    "subgraphUrl": "https://api.thegraph.com/subgraphs/name/yogi-fi/polygon",
+    "explorer": "https://explorer.matic.network",
+    "poolsUrl": "http://polygon.pools.yogi.fi",
     "addresses": {
         "bFactory": "0x63BA45F4Af4Ca1B49BEA0c8d434CFcB0F5f6F828",
         "bActions": "0xadEED4642549e69a695C866EfAd81841a61fF226",
         "dsProxyRegistry": "0x4bB55f75dF311212988eE357Aa2F576A5236c116",
         "exchangeProxy": "0xa7E44F96bF4838d10C9ed77888A9046C12082540",
         "wnative": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-        "multicall": "0x88a85d5B9358DAb64D1Ca6d49A0BBF8fC621A8F8"
+        "multicall": "0x7B23A56572cBC04035da7852a5427066EC2C2040"
     },
     "connectors": {
         "injected": {},
         "walletconnect": {
             "rpc": {
-                "56": "https://bsc-dataseed.binance.org/"
+                "137": "https://rpc-mainnet.maticvigil.com/"
             }
         }
     }

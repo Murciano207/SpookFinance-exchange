@@ -71,7 +71,8 @@ import { PropType, defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import { RootState } from '@/store';
-import { NATIVE_TOKEN, scale } from '@/utils/helpers';
+import { scale } from '@/utils/helpers';
+import config from '@/config';
 
 import AssetIcon from '@/components/AssetIcon.vue';
 import ButtonText from '@/components/ButtonText.vue';
@@ -138,7 +139,7 @@ export default defineComponent({
             if (props.modalKey !== 'input') {
                 return false;
             }
-            if (props.address === NATIVE_TOKEN) {
+            if (props.address === config.native) {
                 return false;
             }
             const assets = store.getters['assets/metadata'];

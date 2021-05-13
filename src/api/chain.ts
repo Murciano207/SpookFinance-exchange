@@ -1,10 +1,10 @@
-import { Provider, Contract } from 'bsccall';
+import { Provider, Contract } from 'yogi-multicall';
 
 import dsProxyRegistryAbi from '../abi/DSProxyRegistry.json';
 import erc20Abi from '../abi/ERC20.json';
 
 import config, { AssetMetadata } from '@/config';
-import { NATIVE_TOKEN, getAssetLogo } from '@/utils/helpers';
+import { getAssetLogo } from '@/utils/helpers';
 import provider from '@/utils/provider';
 
 export type Allowances = Record<string, Record<string, string>>;
@@ -19,7 +19,7 @@ export interface AccountState {
 
 export default class Chain {
     static async fetchAccountState(address: string, assets: string[]): Promise<AccountState> {
-        assets = assets.filter(asset => asset !== NATIVE_TOKEN);
+        assets = assets.filter(asset => asset !== config.native);
         const callProvider = new Provider();
         await callProvider.init(provider);
         const calls = [];
@@ -33,7 +33,7 @@ export default class Chain {
             calls.push(allowanceCall);
         }
         // Fetch bnb balance
-        const balanceCall = callProvider.getBnbBalance(address);
+        const balanceCall = callProvider.getBalance(address);
         calls.push(balanceCall);
         // Fetch proxy
         const dsProxyRegistryAddress = config.addresses.dsProxyRegistry;

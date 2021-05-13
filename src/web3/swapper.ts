@@ -7,9 +7,9 @@ import { Swap } from 'yogi-sor/dist/types';
 import ExchangeProxyABI from '../abi/ExchangeProxy.json';
 
 import config from '@/config';
-import { NATIVE_TOKEN, logRevertedTx } from '@/utils/helpers';
+import { logRevertedTx } from '@/utils/helpers';
 
-const BNB_ADDRESS = '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB';
+const NATIVE_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
 const exchangeProxyAddress = config.addresses.exchangeProxy;
 
 export default class Swapper {
@@ -22,12 +22,12 @@ export default class Swapper {
         assetOutAmountMin: BigNumber,
     ): Promise<any> {
         const overrides: any = {};
-        if (assetInAddress === NATIVE_TOKEN) {
-            assetInAddress = BNB_ADDRESS;
+        if (assetInAddress === config.native) {
+            assetInAddress = NATIVE_ADDRESS;
             overrides.value = `0x${assetInAmount.toString(16)}`;
         }
-        if (assetOutAddress === NATIVE_TOKEN) {
-            assetOutAddress = BNB_ADDRESS;
+        if (assetOutAddress === config.native) {
+            assetOutAddress = NATIVE_ADDRESS;
         }
         const exchangeProxyContract = new Contract(exchangeProxyAddress, ExchangeProxyABI, provider.getSigner());
         try {
@@ -68,12 +68,12 @@ export default class Swapper {
         assetInAmountMax: BigNumber,
     ): Promise<any> {
         const overrides: any = {};
-        if (assetInAddress === NATIVE_TOKEN) {
-            assetInAddress = BNB_ADDRESS;
+        if (assetInAddress === config.native) {
+            assetInAddress = NATIVE_ADDRESS;
             overrides.value = `0x${assetInAmountMax.toString(16)}`;
         }
-        if (assetOutAddress === NATIVE_TOKEN) {
-            assetOutAddress = BNB_ADDRESS;
+        if (assetOutAddress === config.native) {
+            assetOutAddress = NATIVE_ADDRESS;
         }
         const exchangeProxyContract = new Contract(exchangeProxyAddress, ExchangeProxyABI, provider.getSigner());
         try {

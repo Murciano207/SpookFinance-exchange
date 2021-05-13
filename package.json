@@ -23,16 +23,17 @@
     "@ethersproject/wallet": "^5.1.0",
     "@metamask/jazzicon": "^2.0.0",
     "@snapshot-labs/lock": "snapshot-labs/lock#a3694bb6b6e615968ee6e04e9a97007eace18c28",
+    "@types/node": "^15.0.3",
     "@vueuse/core": "^4.7.0",
     "@walletconnect/web3-provider": "^1.4.1",
     "bignumber.js": "^9.0.1",
-    "bsccall": "yogi-fi/yogi-bsccall#master",
     "dotenv-webpack": "^2.0.0",
     "vue": "^3.0.2",
     "vue-router": "^4.0.0-rc.6",
     "vuex": "^4.0.0-rc.2",
-    "yogi-assets": "yogi-fi/yogi-assets#master",
-    "yogi-sor": "yogi-fi/yogi-sor#master"
+    "yogi-assets": "yogi-fi/yogi-assets",
+    "yogi-multicall": "yogi-fi/yogi-multicall",
+    "yogi-sor": "yogi-fi/yogi-sor"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.29.0",
