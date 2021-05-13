@@ -8,11 +8,11 @@
     "explorer": "https://explorer.matic.network",
     "poolsUrl": "http://polygon.pools.yogi.fi",
     "addresses": {
-        "bFactory": "0x63BA45F4Af4Ca1B49BEA0c8d434CFcB0F5f6F828",
-        "bActions": "0xadEED4642549e69a695C866EfAd81841a61fF226",
-        "dsProxyRegistry": "0x4bB55f75dF311212988eE357Aa2F576A5236c116",
-        "exchangeProxy": "0xa7E44F96bF4838d10C9ed77888A9046C12082540",
-        "wnative": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "bFactory": "0x2Fab27B3B379b550AED296B7Fb48D7EfEAabda57",
+        "bActions": "0xcd30F8eeBEa878c7967D86dE5C5Dac7EE18cdd14",
+        "dsProxyRegistry": "0x356EEEE5502B82fcA6054139251E61E873C603d4",
+        "exchangeProxy": "0x11bC5d49429eD36ac62F93b523235cd76e022900",
+        "wnative": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
         "multicall": "0x7B23A56572cBC04035da7852a5427066EC2C2040"
     },
     "connectors": {
