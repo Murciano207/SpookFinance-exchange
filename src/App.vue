@@ -96,7 +96,7 @@ export default defineComponent({
 }
 
 [data-theme="dark"] {
-    --background-primary: rgb(11, 12, 24);
+    --background-primary: radial-gradient(circle at 0% 0%, #4B0082, #1a2361);
     --background-secondary: #21222c;
     --background-control: #1f2029;
     --background-hover: #20222c;
