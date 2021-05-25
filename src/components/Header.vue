@@ -30,10 +30,17 @@
                 </div>
                 <a
                     class="link"
-                    href="https://pools.yogi.fi"
+                    :href="poolsLink"
                     target="_blank"
                 >
                     Pools
+                </a>
+                <a
+                    class="link"
+                    :href="farmsLink"
+                    target="_blank"
+                >
+                    Farms
                 </a>
                 <a
                     class="link"
@@ -69,6 +76,7 @@ export default defineComponent({
         Icon,
     },
     setup() {
+        
         // eslint-disable-next-line no-undef
         const isDev = ref(process.env.APP_ENV === 'dev');
         // eslint-disable-next-line no-undef
@@ -80,6 +88,9 @@ export default defineComponent({
 
         const mode = ref(Storage.isDarkmode());
         const modeLogo = computed(() => getLogo(mode.value));
+
+        const poolsLink = process.env.APP_POOLS || "https://pools.yogi.fi";
+        const farmsLink = process.env.APP_FARMS || "https://farms.yogi.fi";
 
         function toggleMode(): void {
             mode.value = Storage.toggleMode();
@@ -98,7 +109,8 @@ export default defineComponent({
             isDev,
             commitLabel,
             commitLink,
-
+            poolsLink,
+            farmsLink,
             modeLogo,
             toggleMode,
         };

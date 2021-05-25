@@ -47,9 +47,8 @@ const configs = {
         ...polygon,
     },
 };
-// eslint-disable-next-line no-undef
-const network = process.env.APP_CHAIN_ID || 137;
 
+const network = Number(process.env.APP_CHAIN_ID || 137);
 const config: Config = configs[network];
 
 export default config;
