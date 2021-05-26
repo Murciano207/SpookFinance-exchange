@@ -2,7 +2,14 @@
     "network": "polygon",
     "chainId": 137,
     "native": "matic",
-    "rpc": ["https://rpc-mainnet.maticvigil.com/"],
+    "rpc": [
+        "https://rpc-mainnet.matic.network",
+        "https://rpc-mainnet.maticvigil.com",
+        "https://rpc-mainnet.matic.quiknode.pro",
+        "https://matic-mainnet.chainstacklabs.com",
+        "https://matic-mainnet-full-rpc.bwarelabs.com",
+        "https://matic-mainnet-archive-rpc.bwarelabs.com"
+    ],
     "precision": 6,
     "subgraphUrl": "https://api.thegraph.com/subgraphs/name/yogi-fi/polygon",
     "explorer": "https://explorer.matic.network",
