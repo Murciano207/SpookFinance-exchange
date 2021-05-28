@@ -246,11 +246,11 @@ export default defineComponent({
             if (isWrapPair(assetInAddress, assetOutAddress)) {
                 if (assetInAddress === config.native) {
                     const tx = await Helper.wrap(provider, assetInAmount);
-                    const text = 'Wrap ether';
+                    const text = `Wrap ${config.native}`;
                     await handleTransaction(tx, text);
                 } else {
                     const tx = await Helper.unwrap(provider, assetInAmount);
-                    const text = 'Unwrap ether';
+                    const text = `Unwrap ${config.native}`;
                     await handleTransaction(tx, text);
                 }
                 store.dispatch('account/fetchAssets', [ config.addresses.wnative ]);
