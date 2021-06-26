@@ -44,6 +44,13 @@
                 </a>
                 <a
                     class="link"
+                    href="https://snapshot.org/#/yogi-fi.eth"
+                    target="_blank"
+                >
+                    Vote
+                </a>
+                <a
+                    class="link"
                     href="https://docs.yogi.fi"
                     target="_blank"
                 >
